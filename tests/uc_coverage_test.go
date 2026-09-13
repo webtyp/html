@@ -75,7 +75,7 @@ func TestCoverageEvents(t *testing.T) {
 	t.Run("Event interface methods - Button", func(t *testing.T) {
 		var ev dom.Event
 		triggered := false
-		btn := Button().ID("btn-ev").On("click", func(e dom.Event) {
+		btn := Button().ID("btn-ev").OnClick(func(e dom.Event) {
 			ev = e
 			triggered = true
 		}).Text("Click")
@@ -145,7 +145,7 @@ func TestCoverageCleanup(t *testing.T) {
 
 	t.Run("Listener cleanup", func(t *testing.T) {
 		triggered := false
-		btn := Button().ID("btn-clean").On("click", func(e dom.Event) {
+		btn := Button().ID("btn-clean").OnClick(func(e dom.Event) {
 			triggered = true
 		}).Text("Click")
 		dom.Render("root", btn)

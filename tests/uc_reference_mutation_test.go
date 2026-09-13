@@ -16,7 +16,7 @@ func TestReference_SetValue_PreservesListeners(t *testing.T) {
 	dom.Render("root", Input("text").ID("f1-input"))
 	ref, _ := dom.Get("f1-input")
 	fired := false
-	ref.On("input", func(e dom.Event) { fired = true })
+	ref.OnInput(func(e dom.Event) { fired = true })
 
 	ref.SetValue("fixed")
 
@@ -35,7 +35,7 @@ func TestReference_SetAttr_PreservesListeners(t *testing.T) {
 	dom.Render("root", Button().ID("f2-btn").Text("Click"))
 	ref, _ := dom.Get("f2-btn")
 	clicked := false
-	ref.On("click", func(e dom.Event) { clicked = true })
+	ref.OnClick(func(e dom.Event) { clicked = true })
 
 	ref.SetAttr("disabled", "")
 	ref.RemoveAttr("disabled")

@@ -28,7 +28,7 @@ func (c *CounterComp) Render() *dom.Element {
 			BindText(c.count),
 		Button().
 			ID(c.GetID()+"-btn").
-			On("click", func(e dom.Event) {
+			OnClick(func(e dom.Event) {
 				curr := c.count.Get()
 				// Simple increment logic for test
 				if curr == "0" { c.count.Set("1") } else { c.count.Set("2") }

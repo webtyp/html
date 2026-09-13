@@ -22,7 +22,7 @@ func (c *StateCapturer) Init(ctx dom.Ctx) {
 
 func (c *StateCapturer) Render() *dom.Element {
 	return Div().Child(
-		Button().ID("btn-r1").On("click", func(e dom.Event) {
+		Button().ID("btn-r1").OnClick(func(e dom.Event) {
 			c.LastCaptured = c.Value.Get()
 		}),
 	)
@@ -54,7 +54,7 @@ func (c *RewireComp) Init(ctx dom.Ctx) {
 
 func (c *RewireComp) Render() *dom.Element {
 	return Div().Child(
-		Button().ID("btn-r3").On("click", func(e dom.Event) {
+		Button().ID("btn-r3").OnClick(func(e dom.Event) {
 			c.Fired++
 			c.Trigger.Toggle()
 		}),

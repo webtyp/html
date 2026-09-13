@@ -60,7 +60,8 @@ type TestReferenceInterface interface {
 	RemoveAttr(key string)
 	SetText(text string)
 	Checked() bool
-	On(eventType string, handler func(event dom.Event))
+	OnClick(handler func(event dom.Event))
+	OnInput(handler func(event dom.Event))
 	Focus()
 }
 
@@ -101,7 +102,7 @@ func (r *TestReference) Checked() bool {
 	return r.val.Get("checked").Bool()
 }
 
-func (r *TestReference) On(eventType string, handler func(event dom.Event)) {
+func (r *TestReference) on(eventType string, handler func(event dom.Event)) {
 	fn := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		var e dom.Event
 		if len(args) > 0 {
@@ -114,6 +115,10 @@ func (r *TestReference) On(eventType string, handler func(event dom.Event)) {
 	})
 	r.val.Call("addEventListener", eventType, fn)
 }
+
+func (r *TestReference) OnClick(handler func(event dom.Event)) { r.on("click", handler) }
+
+func (r *TestReference) OnInput(handler func(event dom.Event)) { r.on("input", handler) }
 
 func (r *TestReference) Focus() {
 	r.val.Call("focus")

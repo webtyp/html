@@ -18,7 +18,7 @@ type SearchChild struct {
 func (c *SearchChild) Render() *dom.Element {
 	return Input("text").
 		ID(c.GetID()+"-input").
-		On("input", func(e dom.Event) {
+		OnInput(func(e dom.Event) {
 			c.count++
 			// c.InputEvents.Set(...)
 		})
@@ -38,7 +38,7 @@ func (c *ParentWithChild) Init(ctx dom.Ctx) {
 func (c *ParentWithChild) Render() *dom.Element {
 	return Div().Child(
 		dom.Show(c.toggle, c.child),
-		Button().ID("toggle-btn").On("click", func(e dom.Event) {
+		Button().ID("toggle-btn").OnClick(func(e dom.Event) {
 			c.toggle.Toggle()
 		}),
 	)

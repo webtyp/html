@@ -15,7 +15,7 @@ type trackableComp struct {
 }
 
 func (c *trackableComp) Render() *dom.Element {
-	return Div().ID(c.GetID()).On("click", func(e dom.Event) {
+	return Div().ID(c.GetID()).OnClick(func(e dom.Event) {
 		c.clickCount++
 	})
 }

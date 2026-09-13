@@ -22,11 +22,11 @@ func (c *SelfUpdater) Init(ctx dom.Ctx) {
 
 func (c *SelfUpdater) Render() *dom.Element {
 	return Div().Child(
-		Input("text").ID(c.GetID()+"-search").On("input", func(e dom.Event) {
+		Input("text").ID(c.GetID()+"-search").OnInput(func(e dom.Event) {
 			c.InputFired++
 			c.toggle.Set(true)
 		}),
-		dom.Show(c.toggle, Div().ID(c.GetID()+"-options").On("click", func(e dom.Event) {
+		dom.Show(c.toggle, Div().ID(c.GetID()+"-options").OnClick(func(e dom.Event) {
 			c.SelectFired++
 		}).Text("Options")),
 	)

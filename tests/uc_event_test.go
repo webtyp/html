@@ -13,20 +13,16 @@ import (
 // EventComponent registers listeners
 type EventComponent struct {
 	dom.Element
-	clickCount  int
-	customCount int
+	clickCount int
 }
 
 func (c *EventComponent) Render() *dom.Element {
 	return Div().
 		ID(c.GetID()).
-		On("click", func(e dom.Event) {
+		OnClick(func(e dom.Event) {
 			c.clickCount++
 			e.PreventDefault()
 			e.StopPropagation()
-		}).
-		On("custom-test", func(e dom.Event) {
-			c.customCount++
 		})
 }
 
@@ -40,7 +36,7 @@ func TestEvents(t *testing.T) {
 		el, _ := GetRef("comp-basic-event")
 
 		clicked := false
-		el.On("click", func(e dom.Event) {
+		el.OnClick(func(e dom.Event) {
 			clicked = true
 		})
 
@@ -64,11 +60,8 @@ func TestEvents(t *testing.T) {
 		clickEvent := js.Global().Get("MouseEvent").New("click")
 		rawEl.Call("dispatchEvent", clickEvent)
 
-		customEvent := js.Global().Get("CustomEvent").New("custom-test")
-		rawEl.Call("dispatchEvent", customEvent)
-
-		if comp.clickCount != 1 || comp.customCount != 1 {
-			t.Errorf("Events not triggered correctly: %d, %d", comp.clickCount, comp.customCount)
+		if comp.clickCount != 1 {
+			t.Errorf("Events not triggered correctly: %d", comp.clickCount)
 		}
 
 		// Unmount via replacement
@@ -85,7 +78,7 @@ func TestEvents(t *testing.T) {
 		el, _ := GetRef("test-input")
 
 		var targetVal string
-		el.On("input", func(e dom.Event) {
+		el.OnInput(func(e dom.Event) {
 			targetVal = e.TargetValue()
 		})
 

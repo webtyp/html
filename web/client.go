@@ -85,12 +85,12 @@ func (a *App) renderHome() *dom.Element {
 		H1().Text("Counter Example"),
 		P().Text("This demonstrates local state updates and hash routing."),
 		Div().Child(
-			Button().Text("-").On("click", func(e dom.Event) {
+			Button().Text("-").OnClick(func(e dom.Event) {
 				a.countVal--
 				a.counter.Set(fmt.Sprint(a.countVal))
 			}),
 			Span().BindText(a.counter).Class("count"),
-			Button().Text("+").On("click", func(e dom.Event) {
+			Button().Text("+").OnClick(func(e dom.Event) {
 				a.countVal++
 				a.counter.Set(fmt.Sprint(a.countVal))
 			}),
@@ -99,7 +99,7 @@ func (a *App) renderHome() *dom.Element {
 		H2().Text("Persistence & Attributes"),
 		P().Text("The theme is persisted in localStorage and applied to <html>."),
 		Div().Child(
-			Button().Text("Toggle Theme").On("click", func(e dom.Event) {
+			Button().Text("Toggle Theme").OnClick(func(e dom.Event) {
 				current := dom.GetDocumentAttr("data-theme")
 				next := "dark"
 				if current == "dark" {
@@ -117,7 +117,7 @@ func (a *App) renderHome() *dom.Element {
 func NavLink(text, hash string, currentRoute *dom.SignalString) *dom.Element {
 	return A(hash).
 		Text(text).
-		On("click", func(e dom.Event) {
+		OnClick(func(e dom.Event) {
 			e.PreventDefault()
 			dom.SetHash(hash)
 		}).
