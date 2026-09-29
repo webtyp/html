@@ -21,7 +21,8 @@ is what keeps an agent that doesn't know the library from building wrong code. M
 - **Docs are minimal "how" instructions, not long skills** — if a rule must be *remembered*, close it
   with types, not prose.
 
-(Ecosystem rationale: `webtyp/app/docs/CONSTRUCTION_HARNESS.md`.)
+(Ecosystem rationale: skill **api-design** — the construction harness, in
+`webtyp/devskills/skills/api-design/SKILL.md`.)
 
 ---
 
@@ -29,6 +30,12 @@ is what keeps an agent that doesn't know the library from building wrong code. M
 
 - No Go stdlib: use `webtyp.com/fmt`. DOM types via `webtyp.com/dom` (dot-imported),
   never `syscall/js`. `switch` not `map`; no `defer/recover`; embed `dom.Element` by value.
+
+## `scaffold/client.go` — consumed by `webtyp.com/app`
+
+`webtyp.com/app` copies this file, from the `html` version it installs, as the default `web/client.go`
+of every new project. Do not move or rename it. When an API change breaks it,
+`tests/scaffold_test.go` fails; update the scaffold in the same commit.
 
 ## Testing & Docs
 
