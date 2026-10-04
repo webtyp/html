@@ -161,6 +161,12 @@ func (e *MockEvent) TargetChecked() bool {
 	return target.Get("checked").Bool()
 }
 
+func (e *MockEvent) Buttons() int {
+	return 0
+}
+
+func (e *MockEvent) ReleasePointerCapture() {}
+
 func TriggerEvent(id, eventType string, value string) {
 	doc := js.Global().Get("document")
 	rawEl := doc.Call("getElementById", id)

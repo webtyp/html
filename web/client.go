@@ -66,8 +66,8 @@ func (a *App) Render() *dom.Element {
 
 		// Content Area
 		Div().Child(
-			dom.Show(dom.DeriveBool(func() bool { return a.currentRoute.Get() == "#about" }), a.renderAbout()),
-			dom.Show(dom.DeriveBool(func() bool { return a.currentRoute.Get() == "#home" || a.currentRoute.Get() == "" }), a.renderHome()),
+			dom.Show(dom.DeriveBool(func() bool { return a.currentRoute.Get() == "#about" }), a.renderAbout),
+			dom.Show(dom.DeriveBool(func() bool { return a.currentRoute.Get() == "#home" || a.currentRoute.Get() == "" }), a.renderHome),
 		).Class("container"),
 	)
 }
