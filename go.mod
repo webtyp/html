@@ -1,8 +1,10 @@
 module webtyp.com/html
 
-go 1.25.2
+go 1.26.8
 
 require (
-	webtyp.com/dom v0.13.20
+	webtyp.com/dom v0.13.21
 	webtyp.com/fmt v1.0.0
 )
+
+require webtyp.com/escape v0.1.0 // indirect
