@@ -4,8 +4,8 @@ package main
 
 import (
 	"webtyp.com/dom"
-	. "webtyp.com/html"
 	"webtyp.com/fmt"
+	. "webtyp.com/html"
 )
 
 // --- App State & Components ---
