@@ -3,7 +3,7 @@ module webtyp.com/html
 go 1.26.8
 
 require (
-	webtyp.com/dom v0.13.22
+	webtyp.com/dom v0.13.23
 	webtyp.com/fmt v1.0.0
 )
 
