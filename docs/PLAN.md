@@ -2,8 +2,10 @@
 PLAN: "refactor: rename scaffold/client.go to scaffold/browser.go with //go:build browser"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 1466854644911309856
+PR: https://github.com/webtyp/html/pull/8
+REVIEWED_COMMIT: de44e549824b02d2c9abba3d2d7b46c37398a59c
 ---
 
 > Read `AGENTS.md` at the repo root before any change.
@@ -91,3 +93,11 @@ Run `gotest ./...` and verify all tests pass.
 | 1 | `scaffold/browser.go` (deleted: `scaffold/client.go`) | Rename scaffold to `scaffold/browser.go` with `//go:build browser` |
 | 2 | `tests/scaffold_test.go` | Compile `./scaffold` with `GOOS=js GOARCH=wasm -tags browser` to `browser.wasm` |
 
+
+## Executor notes
+
+- All steps completed successfully.
+- Renamed `scaffold/client.go` to `scaffold/browser.go`.
+- Updated build tags and comments.
+- Updated `tests/scaffold_test.go`.
+- Verified all tests pass with `gotest`.
