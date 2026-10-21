@@ -2,8 +2,10 @@
 PLAN: "refactor: rename scaffold/client.go to scaffold/browser.go with //go:build browser"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 1466854644911309856
+PR: https://github.com/webtyp/html/pull/8
+REVIEWED_COMMIT: de44e549824b02d2c9abba3d2d7b46c37398a59c
 ---
 
 > Read `AGENTS.md` at the repo root before any change.
