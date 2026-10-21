@@ -91,3 +91,11 @@ Run `gotest ./...` and verify all tests pass.
 | 1 | `scaffold/browser.go` (deleted: `scaffold/client.go`) | Rename scaffold to `scaffold/browser.go` with `//go:build browser` |
 | 2 | `tests/scaffold_test.go` | Compile `./scaffold` with `GOOS=js GOARCH=wasm -tags browser` to `browser.wasm` |
 
+
+## Executor notes
+
+- All steps completed successfully.
+- Renamed `scaffold/client.go` to `scaffold/browser.go`.
+- Updated build tags and comments.
+- Updated `tests/scaffold_test.go`.
+- Verified all tests pass with `gotest`.
