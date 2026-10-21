@@ -1,49 +1,26 @@
-# Agent Guide — `webtyp/html`
+# AGENTS.md — `webtyp/html`
 
-Constraints for agents working on the HTML tag builder. Read this before any change.
+<!-- webtyp:base — copied from devskills skill agents-md; do not edit here -->
+## Ecosystem rules — read before any change
 
----
+`docs/PLAN.md` is the spec: no design judgment; anything unclear is a question in the PR, not a guess.
 
-## Construction Harness — typed & explicit (the WebTyp approach)
+- Public API: typed (no `any`/`interface{}`), explicit, minimal; never export a symbol only a test uses.
+- One intent, one path: the old path is deleted in the same change. No silent fallback, `TODO`, commented code or stub.
+- Fail at compile time, else a loud diagnostic — never silently. Zero values deny.
+- A defect in a dependency is reported, never wrapped or patched here.
+- No string literals in logic: named constants. The same logic never lives in two repos.
+- `cmd/*/main.go`: parse flags, inject, print/exit only. stdout = data, stderr = logs, exit codes are the contract.
+- WASM code: `webtyp/fmt`, `webtyp/time`, `webtyp/json` instead of stdlib; no `map`; `dom.Element` embedded by value.
+- `css.go`, `svg.go`, `js.go`, `html.go` carry `//go:build !wasm`; no `ssr.go`, no `front.go`.
+- Code and keys in English; UI text is `lang.Text`, translations live in `lang.json`.
+- Tests cover behaviour and domain rules, never the look (CSS, colours, markup order, class strings). In `tests/` (external package), real stack with fakes only at the edge; run `gotest`.
+- Docs (`README.md`, `docs/*`) updated with the API; permanent docs never link `docs/PLAN.md`.
+- Before the PR: `git diff --stat main` lists every file of the plan's stages, and nothing the plan did not order is deleted.
+<!-- /webtyp:base -->
 
-This library is the **tag builder** layer of WebTyp's construction harness: the typed, explicit API
-is what keeps an agent that doesn't know the library from building wrong code. Model it on
-`webtyp/json` (typed methods per primitive, zero `any` in the data path).
+## This repo
 
-- **No `any` in the builder.** Tag constructors are **no-arg** (`Span()`, `Div()`, `Button()`); compose
-  via typed `*dom.Element` methods (`Text`, `Child`, `Attr`, `Class`, `Set`). Never a `Tag(...any)`
-  slot. Constructors may take **semantic** args only (`Input(type)`, `Option(value,text)`).
-- **Reuse `fmt` types — no duplicates.** Attributes are `fmt.KeyValue` (declared in `fmt/parse.go`);
-  children are `*dom.Element`. Do **not** declare a `Node`/`Text`/attr wrapper type.
-- **Reactive content is typed** — anything that changes goes only through a signal binding
-  (`BindText`/`Bind*`), which requires a `*dom.Signal*`. The builder composes only **static** content.
-- **Explicit names** — `.Text` (static) vs `.BindText` (reactive); reading a call states intent.
-- **Docs are minimal "how" instructions, not long skills** — if a rule must be *remembered*, close it
-  with types, not prose.
-
-(Ecosystem rationale: skill **api-design** — the construction harness, in
-`webtyp/devskills/skills/api-design/SKILL.md`.)
-
----
-
-## WASM / TinyGo
-
-- No Go stdlib: use `webtyp.com/fmt`. DOM types via `webtyp.com/dom` (dot-imported),
-  never `syscall/js`. `switch` not `map`; no `defer/recover`; embed `dom.Element` by value.
-
-## `scaffold/client.go` — consumed by `webtyp.com/app`
-
-`webtyp.com/app` copies this file, from the `html` version it installs, as the default `web/client.go`
-of every new project. Do not move or rename it. When an API change breaks it,
-`tests/scaffold_test.go` fails; update the scaffold in the same commit.
-
-## Testing & Docs
-
-```bash
-go install webtyp.com/devflow/cmd/gotest@latest
-gotest
-```
-
-`gotest`, never `go test`; stdlib assertions only; dual WASM/stdlib. Publish with `gopush 'message'`.
-Documentation first: update `docs/` and re-index `README.md` before code. Diagrams: `flowchart TD`,
-no `subgraph`, `<br/>` for breaks.
+- This library is the **tag builder** layer of WebTyp's construction harness: tag constructors are no-arg (`Span()`, `Div()`, `Button()`) except semantic args (`Input(type)`, `Option(value,text)`). Compose via typed `*dom.Element` methods (`Text`, `Child`, `Attr`, `Class`, `Set`, `BindText`).
+- Reuse `fmt.KeyValue` for attributes and `*dom.Element` for children; do not declare wrapper types.
+- `scaffold/` holds the default browser entry point copied by `webtyp.com/app` into new projects (`tests/scaffold_test.go` verifies that it compiles for `GOOS=js GOARCH=wasm`).
