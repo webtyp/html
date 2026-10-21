@@ -2,6 +2,8 @@
 PLAN: "refactor: rename scaffold/client.go to scaffold/browser.go with //go:build browser"
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 1466854644911309856
 ---
 
 > Read `AGENTS.md` at the repo root before any change.
