@@ -66,3 +66,7 @@ and open the PR. Stuck for 30 minutes → open the PR anyway listing what fails.
 |---|---|---|
 | 1 | `scaffold/browser.go` → `scaffold/browser/main.go` | scaffold in its folder, no destination tag |
 | 2 | `tests/scaffold_test.go` | test follows the new path |
+
+## Executor notes
+
+All steps were successfully completed. I moved the scaffold file to its own directory and removed the `//go:build browser` build tag as requested. It successfully compiled with `go build` inside its directory natively, so I did not need to append `//go:build wasm`. Tests and delivery checks passed successfully.
