@@ -2,8 +2,10 @@
 PLAN: "feat!: scaffold browser main at scaffold/browser/main.go, copied to web/browser/main.go"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 4338760399953196305
+PR: https://github.com/webtyp/html/pull/9
+REVIEWED_COMMIT: 25b20ad775d2fb1e6bb5a2f0217da9b8d9be0b74
 ---
 
 > Read AGENTS.md at the repo root before any change.
@@ -66,3 +68,7 @@ and open the PR. Stuck for 30 minutes → open the PR anyway listing what fails.
 |---|---|---|
 | 1 | `scaffold/browser.go` → `scaffold/browser/main.go` | scaffold in its folder, no destination tag |
 | 2 | `tests/scaffold_test.go` | test follows the new path |
+
+## Executor notes
+
+All steps were successfully completed. I moved the scaffold file to its own directory and removed the `//go:build browser` build tag as requested. It successfully compiled with `go build` inside its directory natively, so I did not need to append `//go:build wasm`. Tests and delivery checks passed successfully.
