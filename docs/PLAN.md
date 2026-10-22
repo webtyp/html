@@ -2,8 +2,10 @@
 PLAN: "feat!: scaffold browser main at scaffold/browser/main.go, copied to web/browser/main.go"
 EXECUTOR: jules
 REVIEWER: none
-STATUS: running
+STATUS: review
 SESSION: 4338760399953196305
+PR: https://github.com/webtyp/html/pull/9
+REVIEWED_COMMIT: 25b20ad775d2fb1e6bb5a2f0217da9b8d9be0b74
 ---
 
 > Read AGENTS.md at the repo root before any change.
