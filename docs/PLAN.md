@@ -2,6 +2,8 @@
 PLAN: "feat!: scaffold browser main at scaffold/browser/main.go, copied to web/browser/main.go"
 EXECUTOR: jules
 REVIEWER: none
+STATUS: running
+SESSION: 4338760399953196305
 ---
 
 > Read AGENTS.md at the repo root before any change.
