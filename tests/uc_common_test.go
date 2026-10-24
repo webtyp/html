@@ -167,6 +167,8 @@ func (e *MockEvent) Buttons() int {
 
 func (e *MockEvent) ReleasePointerCapture() {}
 
+func (e *MockEvent) ClientY() float64 { return 0 }
+
 func TriggerEvent(id, eventType string, value string) {
 	doc := js.Global().Get("document")
 	rawEl := doc.Call("getElementById", id)
