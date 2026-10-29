@@ -124,8 +124,8 @@ func TestDocumentSEOMetadata(t *testing.T) {
 	opts := DocumentOptions{
 		Title:       "Oftalmología en Chillán",
 		Description: "Atención oftalmológica accesible en el centro de Chillán.",
-		Canonical:   "https://monjitaschillan.cl/especialidades/oftalmologia/",
-		Image:       "https://monjitaschillan.cl/img/consultorio.webp",
+		Canonical:   "https://example.com/especialidades/oftalmologia/",
+		Image:       "https://example.com/img/consultorio.webp",
 		JSONLD:      `{"@context":"https://schema.org","@type":"MedicalClinic"}`,
 	}
 
@@ -135,9 +135,9 @@ func TestDocumentSEOMetadata(t *testing.T) {
 		`<meta name='description' content='Atención oftalmológica accesible en el centro de Chillán.'>`,
 		`<meta property='og:description' content='Atención oftalmológica accesible en el centro de Chillán.'>`,
 		`<meta property='og:title' content='Oftalmología en Chillán'>`,
-		`<link rel='canonical' href='https://monjitaschillan.cl/especialidades/oftalmologia/'>`,
-		`<meta property='og:url' content='https://monjitaschillan.cl/especialidades/oftalmologia/'>`,
-		`<meta property='og:image' content='https://monjitaschillan.cl/img/consultorio.webp'>`,
+		`<link rel='canonical' href='https://example.com/especialidades/oftalmologia/'>`,
+		`<meta property='og:url' content='https://example.com/especialidades/oftalmologia/'>`,
+		`<meta property='og:image' content='https://example.com/img/consultorio.webp'>`,
 		`<script type='application/ld+json'>{"@context":"https://schema.org","@type":"MedicalClinic"}</script>`,
 	} {
 		if !strings.Contains(got, want) {
