@@ -4,7 +4,7 @@ go 1.26.8
 
 require (
 	webtyp.com/dom v0.13.29
-	webtyp.com/fmt v1.0.1
+	webtyp.com/fmt v1.0.2
 )
 
 require webtyp.com/escape v0.1.0 // indirect
