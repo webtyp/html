@@ -6,12 +6,14 @@ import (
 
 // DocumentOptions configures the document shell.
 type DocumentOptions struct {
-	Lang       string // default "en"
-	Title      string
-	CSSURL     string // <link rel="stylesheet">
-	JSURL      string // <script src defer>
-	FaviconURL string // <link rel="icon">
-	Head       string // extra markup for <head> (optional)
+	Lang         string // default "en"
+	Title        string
+	CSSURL       string // <link rel="stylesheet">
+	CSSIntegrity string // optional SRI hash (e.g. "sha384-...") for CSSURL
+	JSURL        string // <script src defer>
+	JSIntegrity  string // optional SRI hash (e.g. "sha384-...") for JSURL
+	FaviconURL   string // <link rel="icon">
+	Head         string // extra markup for <head> (optional)
 
 	// Description, Canonical and Image are the per-page metadata a search or
 	// answer engine reads. They are typed fields rather than markup pushed
@@ -78,10 +80,18 @@ func Document(opts DocumentOptions, body ...Component) *Element {
 		head.Child(NewElement("link").NoCloseTag().Attr("rel", "icon").Attr("href", opts.FaviconURL))
 	}
 	if opts.CSSURL != "" {
-		head.Child(NewElement("link").NoCloseTag().Attr("rel", "stylesheet").Attr("href", opts.CSSURL))
+		link := NewElement("link").NoCloseTag().Attr("rel", "stylesheet").Attr("href", opts.CSSURL)
+		if opts.CSSIntegrity != "" {
+			link.Attr("integrity", opts.CSSIntegrity).Attr("crossorigin", "anonymous")
+		}
+		head.Child(link)
 	}
 	if opts.JSURL != "" {
-		head.Child(NewElement("script").Attr("src", opts.JSURL).Attr("defer", ""))
+		script := NewElement("script").Attr("src", opts.JSURL).Attr("defer", "")
+		if opts.JSIntegrity != "" {
+			script.Attr("integrity", opts.JSIntegrity).Attr("crossorigin", "anonymous")
+		}
+		head.Child(script)
 	}
 	if opts.Head != "" {
 		head.Text(opts.Head)
